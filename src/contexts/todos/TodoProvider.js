@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import TodoContext from "./TodoContext";
 import TodoReducer from "./TodoReducer";
-import { ADD_TODOS } from "../Types";
+import { ADD_TODOS, DELETE_TODOS, EDIT_TODOS } from "../Types";
 
 const TodoProvider = (props) => {
   //defining states as well as actions
@@ -22,8 +22,17 @@ const TodoProvider = (props) => {
     dispatch({ type: ADD_TODOS, payload: newTodo });
   };
 
+  const DeleteTodos = (id) => {
+    dispatch({ type: DELETE_TODOS, payload: id });
+  };
+
+  const EditTodo = (todo) => {
+    dispatch({ type: EDIT_TODOS, payload: todo });
+  };
   return (
-    <TodoContext.Provider value={{ todos: state.todos, AddTodos }}>
+    <TodoContext.Provider
+      value={{ todos: state.todos, AddTodos, DeleteTodos, EditTodo }}
+    >
       {props.children}
     </TodoContext.Provider>
   );

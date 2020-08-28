@@ -8,10 +8,23 @@ export default (state, action) => {
       };
 
     case DELETE_TODOS:
-      break;
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
+      };
 
     case EDIT_TODOS:
-      break;
+      const updatingTodo = action.payload;
+      const updated = state.todos.map((todo) => {
+        if (todo.id === updatingTodo.id) {
+          return updatingTodo;
+        }
+        return todo;
+      });
+      return {
+        ...state,
+        todos: updated,
+      };
 
     default:
       return state;

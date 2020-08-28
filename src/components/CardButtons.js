@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "reactstrap";
 import { FaUserEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import { MdExpandMore } from "react-icons/md";
 
+import TodoContext from "../contexts/todos/TodoContext";
 const CardButtons = (props) => {
-  const click = () => {
-    console.log();
+  const id = props.id;
+
+  const values = useContext(TodoContext);
+  const { DeleteTodos } = values;
+
+  const deleteClick = () => {
+    DeleteTodos(id);
   };
+
+  const editClick = () => {
+    console.log(id);
+  };
+
   return (
     <div className="bg-light">
-      <Button className="bg-light border-light" onClick={click}>
+      <Button className="bg-light border-light">
         <MdExpandMore style={{ color: "black", fontSize: "2em" }} />
       </Button>
 
-      <Button className="bg-light border-light" onClick={click}>
+      <Button className="bg-light border-light" onClick={editClick}>
         <FaUserEdit
           className="float-right mx-4"
           style={{ color: "blue", fontSize: "1.5em" }}
         />
       </Button>
 
-      <Button className="bg-light border-light" onClick={click}>
+      <Button className="bg-light border-light" onClick={deleteClick}>
         <AiFillDelete
           className="float-right"
           style={{ color: "red", fontSize: "1.5em" }}

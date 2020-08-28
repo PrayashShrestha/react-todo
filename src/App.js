@@ -8,6 +8,7 @@ const App = () => {
     <div className="bg-light">
       <Header />
       <AddToDo />
+
       <List />
     </div>
   );
