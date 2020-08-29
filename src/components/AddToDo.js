@@ -25,16 +25,17 @@ const AddToDo = () => {
         title: localStates,
       });
       setLocalState("");
-      console.log(localStates);
     } else {
-      if (!localStates.title) return;
+      console.log(localStates);
+      if (!localStates) return;
+
       EditTodo({
-        id: localStates.id,
-        title: localStates.title,
+        id: editItem.id,
+        title: localStates,
       });
+
       setLocalState("");
       setEditItem("");
-      console.log(localStates.title);
     }
   };
 

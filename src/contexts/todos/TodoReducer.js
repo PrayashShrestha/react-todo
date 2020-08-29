@@ -14,6 +14,7 @@ export default (state, action) => {
       };
 
     case EDIT_TODOS:
+      console.log(action.payload);
       return {
         ...state,
         todos: [...state.todos, action.payload],

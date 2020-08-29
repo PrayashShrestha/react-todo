@@ -51,6 +51,7 @@ const TodoProvider = (props) => {
   };
 
   const EditTodo = (todo) => {
+    console.log(todo);
     dispatch({ type: EDIT_TODOS, payload: todo });
   };
 
