@@ -1,4 +1,4 @@
-import { ADD_TODOS, DELETE_TODOS, EDIT_TODOS } from "../Types";
+import { ADD_TODOS, DELETE_TODOS, EDIT_TODOS, FILTER_KEY } from "../Types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -14,18 +14,16 @@ export default (state, action) => {
       };
 
     case EDIT_TODOS:
-      const updatingTodo = action.payload;
-      const updated = state.todos.map((todo) => {
-        if (todo.id === updatingTodo.id) {
-          return updatingTodo;
-        }
-        return todo;
-      });
       return {
         ...state,
-        todos: updated,
+        todos: [...state.todos, action.payload],
       };
 
+    case FILTER_KEY:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload.id),
+      };
     default:
       return state;
   }

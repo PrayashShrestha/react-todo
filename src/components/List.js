@@ -5,7 +5,7 @@ import TodoContext from "../contexts/todos/TodoContext";
 
 const List = () => {
   const values = useContext(TodoContext);
-  console.log(values.todos);
+
   return (
     <div className="container text-center">
       <h1 className="font-weight-bold">Task-List</h1>

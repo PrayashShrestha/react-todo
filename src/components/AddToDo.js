@@ -1,44 +1,69 @@
-import React, { useState, useContext } from "react";
-import {
-  Input,
-  Form,
-  FormGroup,
-  Col,
-  InputGroup,
-  InputGroupAddon,
-  Button,
-} from "reactstrap";
+import React, { useContext } from "react";
+
 import TodoContext from "../contexts/todos/TodoContext";
 import uuid from "react-uuid";
+import StateInput from "./StateInput";
 
 const AddToDo = () => {
-  let [localState, setLocalState] = useState("");
-
   const values = useContext(TodoContext);
-  const { AddTodos } = values;
+  const {
+    AddTodos,
+    localStates,
+    setLocalState,
+    onChange,
+    editItem,
+    setEditItem,
+    EditTodo,
+  } = values;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!localState) return;
-    AddTodos({
-      id: uuid(),
-      title: localState,
-    });
-    setLocalState("");
-    console.log(localState);
+    if (!editItem) {
+      if (!localStates) return;
+      AddTodos({
+        id: uuid(),
+        title: localStates,
+      });
+      setLocalState("");
+      console.log(localStates);
+    } else {
+      if (!localStates.title) return;
+      EditTodo({
+        id: localStates.id,
+        title: localStates.title,
+      });
+      setLocalState("");
+      setEditItem("");
+      console.log(localStates.title);
+    }
   };
+
   return (
     <>
-      <Form className="m-3" onSubmit={onSubmit}>
+      <StateInput
+        onSubmit={onSubmit}
+        name="addtodo"
+        value={editItem ? localStates.title : localStates}
+        placeholder="Enter Todo"
+        onChange={onChange}
+        buttonLabel={editItem ? "Edit Todo" : "Add Todo"}
+      />
+    </>
+  );
+};
+
+export default AddToDo;
+
+/* <Form className="m-3" onSubmit={onSubmit}>
         <FormGroup col>
           <Col md={4} sm={7} className="mx-auto">
             <InputGroup>
               <Input
                 className="border-dark"
                 name="addtodo"
-                value={localState}
+                value={localStates}
                 placeholder="Enter Todo"
-                onChange={(e) => setLocalState(e.target.value)}
+                onChange={onChange}
               />
               <InputGroupAddon addonType="prepend">
                 <Button className="bg-info" type="submit">
@@ -48,9 +73,4 @@ const AddToDo = () => {
             </InputGroup>
           </Col>
         </FormGroup>
-      </Form>
-    </>
-  );
-};
-
-export default AddToDo;
+      </Form> */
