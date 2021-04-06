@@ -1,3 +1,6 @@
+In this project I've made react todo using contet api and also added functionality to add, edit and delete todo
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
